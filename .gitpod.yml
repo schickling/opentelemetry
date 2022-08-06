@@ -1,5 +1,5 @@
 tasks:
-  - init: yarn install
+  - init: yarn install && cd .infra && docker compose pull
     command: cd .infra && docker compose up -d
 
 ports:
