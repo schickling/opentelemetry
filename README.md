@@ -37,5 +37,8 @@ curl https://codeload.github.com/schickling-test/2022-opentelemetry/tar.gz/main 
 
 ## TODO
 
-- Make Grafana/Tempo search work
-- Add effect example
+- [ ] Make Grafana/Tempo search work
+- [ ] Go from metrics to traces
+- [ ] Go from traces to metrics
+- [ ] Add grafana dashboard to project for some Otel metrics
+- [ ] Add effect example
