@@ -1,4 +1,4 @@
-# 2022-opentelemetry
+# 2022-opentelemetry [![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-ready--to--code-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/schickling-test/2022-opentelemetry)
 
 - OTLP endpoints via HTTP `4318` and gRPC `4317`
 
@@ -8,6 +8,10 @@
 cd .infra
 docker compose up -d
 ```
+
+## Examples
+
+- See [`opentelemetry-js` repo](https://github.com/open-telemetry/opentelemetry-js) for more JS/TS examples
 
 ## Notes
 
