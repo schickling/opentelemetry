@@ -17,6 +17,15 @@ docker compose up -d
 
 - You can use the `OTEL_EXPORTER_OTLP_ENDPOINT="http://localhost:4317"` env var to configure the collector endpoint (see [here for details](https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/protocol/exporter.md)).
 
+### Spanmetrics on Prometheus
+
+```
+traces_spanmetrics_calls_total
+traces_spanmetrics_latency_bucket
+traces_spanmetrics_latency_count
+traces_spanmetrics_latency_sum
+```
+
 ### Snippet to clone `.infra` folder to a local project
 
 ```sh
