@@ -18,7 +18,10 @@ exporters:
     endpoint: jaeger-all-in-one:14250
     tls:
       insecure: true
+  prometheus:
+    endpoint: "0.0.0.0:8889"
 
+# TODO should I re-enable the batch processor?
 # processors:
 #   batch:
 
@@ -28,3 +31,6 @@ service:
       receivers: [otlp]
       exporters: [otlp, jaeger]
       # processors: [batch]
+    metrics:
+      receivers: [otlp]
+      exporters: [prometheus]
