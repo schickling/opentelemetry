@@ -17,6 +17,15 @@ docker compose up -d
 
 - You can use the `OTEL_EXPORTER_OTLP_ENDPOINT="http://localhost:4317"` env var to configure the collector endpoint (see [here for details](https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/protocol/exporter.md)).
 
+### Snippet to clone `.infra` folder to a local project
+
+```sh
+mkdir .infra
+cd .infra
+curl https://codeload.github.com/schickling-test/2022-opentelemetry/tar.gz/main | \
+  tar -xz --strip=2 2022-opentelemetry-main/.infra
+```
+
 ## TODO
 
 - Make Grafana/Tempo search work
