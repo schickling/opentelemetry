@@ -1,4 +1,4 @@
-# 2022-opentelemetry [![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-ready--to--code-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/schickling-test/2022-opentelemetry)
+# opentelemetry [![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-ready--to--code-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/schickling/opentelemetry)
 
 - OTLP endpoints via HTTP `4318` and gRPC `4317`
 
@@ -31,8 +31,8 @@ traces_spanmetrics_latency_sum
 ```sh
 mkdir .infra
 cd .infra
-curl https://codeload.github.com/schickling-test/2022-opentelemetry/tar.gz/main | \
-  tar -xz --strip=2 2022-opentelemetry-main/.infra
+curl https://codeload.github.com/schickling/opentelemetry/tar.gz/main | \
+  tar -xz --strip=2 opentelemetry-main/.infra
 ```
 
 ## TODO
