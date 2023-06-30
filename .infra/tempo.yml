@@ -1,10 +1,12 @@
-search_enabled: true
-metrics_generator_enabled: true
-
 server:
   http_listen_port: 3200
-  grpc_server_max_recv_msg_size: 33554432 # 32mb
-  grpc_server_max_send_msg_size: 33554432 # 32mb
+  grpc_server_max_recv_msg_size: 67108864 # 64mb
+  grpc_server_max_send_msg_size: 67108864 # 64mb
+
+querier:
+  frontend_worker:
+    grpc_client_config:
+      max_send_msg_size: 67108864 # 64mb
 
 distributor:
   receivers: # this configuration will listen on all ports and protocols that tempo is capable of.
@@ -19,6 +21,7 @@ distributor:
       protocols:
         http:
         grpc:
+          max_recv_msg_size_mib: 20
     opencensus:
 
 ingester:
@@ -33,7 +36,13 @@ compactor:
     block_retention: 1h
     compacted_block_retention: 10m
 
+# https://grafana.com/docs/tempo/latest/configuration/#metrics-generator
 metrics_generator:
+  # processor:
+  #   span_metrics:
+  #     dimensions: [
+  #         'sessionId', # whatever you need
+  #       ]
   storage:
     path: /tmp/tempo/wal
     remote_write:
@@ -42,17 +51,19 @@ metrics_generator:
 
 overrides:
   metrics_generator_processors: ['service-graphs', 'span-metrics']
+  metrics_generator_collection_interval: 250ms
+  max_bytes_per_trace: 67108864 # 64mb (5mb default)
 
 storage:
   trace:
     backend: local # backend configuration to use
     block:
       bloom_filter_false_positive: .05 # bloom filter false positive rate.  lower values create larger filters but fewer false positives
-      index_downsample_bytes: 1000 # number of bytes per index record
-      encoding: zstd # block encoding/compression.  options: none, gzip, lz4-64k, lz4-256k, lz4-1M, lz4, snappy, zstd, s2
+      v2_index_downsample_bytes: 1000 # number of bytes per index record
+      v2_encoding: zstd # block encoding/compression.  options: none, gzip, lz4-64k, lz4-256k, lz4-1M, lz4, snappy, zstd, s2
     wal:
       path: /tmp/tempo/wal # where to store the the wal locally
-      encoding: snappy # wal encoding/compression.  options: none, gzip, lz4-64k, lz4-256k, lz4-1M, lz4, snappy, zstd, s2
+      v2_encoding: snappy # wal encoding/compression.  options: none, gzip, lz4-64k, lz4-256k, lz4-1M, lz4, snappy, zstd, s2
     local:
       path: /tmp/tempo/blocks
     pool:

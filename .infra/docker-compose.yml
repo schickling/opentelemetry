@@ -3,7 +3,7 @@ services:
 
   otel-collector:
     # https://hub.docker.com/r/otel/opentelemetry-collector/tags
-    image: otel/opentelemetry-collector:0.56.0
+    image: otel/opentelemetry-collector:0.80.0
     command: [ "--config=/etc/otel-collector.yml" ]
     volumes:
       - ./otel-collector.yml:/etc/otel-collector.yml
@@ -25,21 +25,14 @@ services:
     volumes:
       - ./grafana.ini:/etc/grafana/grafana.ini # needed for tempo-search feature toggle
       - ./grafana-datasources.yml:/etc/grafana/provisioning/datasources/datasources.yml
+      - ./grafana-dashboards.yml:/etc/grafana/provisioning/dashboards/dashboards.yml
+      - ./grafana-dashboards:/etc/dashboards
     environment:
       - GF_AUTH_ANONYMOUS_ENABLED=true
       - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
       - GF_AUTH_DISABLE_LOGIN_FORM=true
     ports:
       - "30003:3000" # web ui (on 30003 since 3000 is often used by other apps)
-
-  # Note Jaeger is currently still here as a backup in case Tempo doesn't work properly
-  jaeger-all-in-one:
-    # https://hub.docker.com/r/jaegertracing/all-in-one/tags
-    image: jaegertracing/all-in-one:1.36.0
-    ports:
-      - '16686:16686'
-      - '14268:14268'
-      - '14250'
   
   prometheus:
     image: prom/prometheus:latest

@@ -14,23 +14,27 @@ exporters:
     endpoint: tempo:4317
     tls:
       insecure: true
-  jaeger:
-    endpoint: jaeger-all-in-one:14250
+  # https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/exporter/prometheusremotewriteexporter
+  prometheusremotewrite:
+    endpoint: 'http://prometheus:9090/api/v1/write'
     tls:
       insecure: true
-  prometheus:
-    endpoint: "0.0.0.0:8889"
+    resource_to_telemetry_conversion:
+      enabled: true
 
-# TODO should I re-enable the batch processor?
-# processors:
-#   batch:
+  logging/metrics:
+    loglevel: debug
+
+processors:
+  batch:
 
 service:
   pipelines:
     traces:
       receivers: [otlp]
-      exporters: [otlp, jaeger]
-      # processors: [batch]
+      exporters: [otlp]
+      processors: [batch]
     metrics:
       receivers: [otlp]
-      exporters: [prometheus]
+      exporters: [prometheusremotewrite]
+      processors: [batch]
