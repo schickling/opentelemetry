@@ -28,4 +28,16 @@ datasources:
     jsonData:
       serviceMap:
         datasourceUid: prometheus
+      spanBar:
+        type: Tag
+        tag: span.label
     uid: tempo
+# https://grafana.com/docs/grafana/latest/administration/provisioning/#provision-folders-structure-from-filesystem-to-grafana
+# providers:
+#   - name: dashboards
+#     type: file
+#     updateIntervalSeconds: 5
+#     allowUiUpdates: true
+#     options:
+#       path: /etc/dashboards
+#       foldersFromFilesStructure: true

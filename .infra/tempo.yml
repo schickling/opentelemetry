@@ -38,11 +38,13 @@ compactor:
 
 # https://grafana.com/docs/tempo/latest/configuration/#metrics-generator
 metrics_generator:
-  # processor:
-  #   span_metrics:
-  #     dimensions: [
-  #         'sessionId', # whatever you need
-  #       ]
+  processor:
+    span_metrics:
+      dimensions: [
+          'effect_cache_status', # used across app
+          'sessionId', # used across app
+          'query', # currently used for Spotify API calls (TODO improve)
+        ]
   storage:
     path: /tmp/tempo/wal
     remote_write:
