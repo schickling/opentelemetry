@@ -21,6 +21,7 @@ distributor:
       protocols:
         http:
         grpc:
+          endpoint: 0.0.0.0:4317
           max_recv_msg_size_mib: 20
     opencensus:
 
@@ -41,9 +42,9 @@ metrics_generator:
   processor:
     span_metrics:
       dimensions: [
-          'effect_cache_status', # used across app
-          'sessionId', # used across app
-          'query', # currently used for Spotify API calls (TODO improve)
+          "effect_cache_status", # used across app
+          "sessionId", # used across app
+          "query", # currently used for Spotify API calls (TODO improve)
         ]
   storage:
     path: /tmp/tempo/wal
@@ -52,7 +53,7 @@ metrics_generator:
         send_exemplars: true
 
 overrides:
-  metrics_generator_processors: ['service-graphs', 'span-metrics']
+  metrics_generator_processors: ["service-graphs", "span-metrics"]
   metrics_generator_collection_interval: 250ms
   max_bytes_per_trace: 67108864 # 64mb (5mb default)
 
